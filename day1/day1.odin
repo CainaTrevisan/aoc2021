@@ -25,14 +25,10 @@ part_1 :: proc(input: []int) {
 }
 
 part_2 :: proc(input: []int) {
-    current_sum  := input[1] + input[2] 
-    previous_sum := input[0] + current_sum 
-    total_increased := 0
-    for i := 3; i < len(input); i += 1 {
-        current_sum += input[i]
-        total_increased += 1 * int(previous_sum < current_sum) 
-        previous_sum = current_sum
-        current_sum -= input[i - 2]
+    total_increased, previous := 0, input[0]
+    for i in 3..<len(input) {
+        total_increased += 1 * int(previous < input[i]) 
+        previous = input[i - 2]
     }
     fmt.println(total_increased)
 }
